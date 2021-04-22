@@ -1,4 +1,6 @@
+import { RouterModule } from '@angular/router';
 import { Component, OnInit } from '@angular/core';
+import { ApiService } from 'src/app/service/api.service';
 
 @Component({
   selector: 'app-home',
@@ -7,9 +9,23 @@ import { Component, OnInit } from '@angular/core';
 })
 export class HomeComponent implements OnInit {
 
-  constructor() { }
+  users: any[] = [];
+  constructor(private apiService: ApiService, private router :RouterModule) { }
+  filterTerm: string ='';
 
   ngOnInit(): void {
+    this.getUsers()
   }
 
+  getUsers(): any 
+  {
+    this.apiService.getUsers().subscribe((data : any)=> {
+      this.users = data;
+          console.log(this.users);
+
+          localStorage.setItem("users", JSON.stringify(this.users))
+    });
+  }
+
+  
 }
