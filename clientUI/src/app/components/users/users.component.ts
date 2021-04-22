@@ -9,29 +9,29 @@ import { Component, OnInit } from '@angular/core';
 export class UsersComponent implements OnInit {
 
   //users : any;
-  users : any =[];
-  name!: string;
+  users: any[] = [];
+  
   constructor(private apiService : ApiService) { }
 
   ngOnInit(): void {
-    this.getUsers();
+    //this.getUsers();
+    //this.apiService.getUsers(this.route.snapshot.paramMap.get('id'));
+
+  //   this.student = this.studentService.studentById;
+  //   console.log(this.student);
+  // }
   }
 
   getUsers()
   {
     this.apiService.getUsers().subscribe((data : any)=> {
       this.users = data;
-      this.name = data.name;
-          //console.log(this.users);
+          console.log(this.users);
 
-          for (let i = 0; i < Object.keys(data).length; i++) {
-            console.log(data[i]);
-          }
+          localStorage.setItem("users", JSON.stringify(this.users))
     });
-    
-  }
+   
+}
 
-
-  
 }
 
