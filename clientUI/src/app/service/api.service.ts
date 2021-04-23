@@ -8,14 +8,17 @@ import { Observable } from 'rxjs';
 })
 export class ApiService {
 
-  url = 'https://jsonplaceholder.typicode.com/users';
+  url = 'https://jsonplaceholder.cypress.io';
 
   constructor(private http : HttpClient) { }
 
   getUsers(): Observable<any>
   {
-    return this.http.get(this.url); 
+    return this.http.get(this.url + '/users'); 
+  }
 
+  getUser(id :number) : Observable<any>{
+    return this.http.get(this.url + `/users/${id}`)
   }
 
 }
