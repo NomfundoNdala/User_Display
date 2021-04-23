@@ -13,21 +13,26 @@
                                         <input class="form-control form-control-lg form-control-borderless" name="filterTerm" [(ngModel)]="filterTerm" type="search" placeholder="Who are you looking for?">
                                     </div>
                                     <!--end of col-->
-                                    <div class="col-auto">
-                                        <button class="btn btn-lg btn-success" type="submit" >Search</button>
-                                    </div>
-                                    <!--end of col-->
                                 </div>
                             </form>
                         </div>
                         <!--end of col-->
                     </div>
-                        <div class="col" *ngFor="let user of users | filter: filterTerm">
+                        <div class="col" *ngFor="let user of users | filter: filterTerm; let index =index">
                             <div class="card">
-                                <div class="card-body" onclick="getUser()">
-                                    <h4 class="card-title">{{user.name}}</h4>
-                                    <button style="right:auto" >View</button>
-                                </div>
+                                <div class="card-body" (click)="getSelectedUser(user,index)">
+                                    <h4 class = "card-title" style ="cursor: pointer;">{{user.name}}</h4>
+                                    <div class = "collapseUser" *ngIf="selectedUserIndex == index">
+                                        <p>{{user.username}}</p>
+                                        <p>{{user.name}}</p>
+                                        <p>{{user.phone}}</p>
+                                        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-arrow-right-circle-fill" viewBox="0 0 16 16" style="cursor: pointer; float:right" (click)="detailsRoute(user.id)">
+                                            <path d="M8 0a8 8 0 1 1 0 16A8 8 0 0 1 8 0zM4.5 7.5a.5.5 0 0 0 0 1h5.793l-2.147 2.146a.5.5 0 0 0 .708.708l3-3a.5.5 0 0 0 0-.708l-3-3a.5.5 0 1 0-.708.708L10.293 7.5H4.5z"/>
+                                          </svg>
+                                        
+                                    </div>
+
+                                </div>  
                             </div>
                         </div>
                 </div>

@@ -1,5 +1,7 @@
+import { UserDetailService } from './../../service/shared/user-detail.service';
 import { ApiService } from './../../service/api.service';
 import { Component, OnInit } from '@angular/core';
+import { UserI } from 'src/app/model/user.interface';
 
 @Component({
   selector: 'app-users',
@@ -8,28 +10,31 @@ import { Component, OnInit } from '@angular/core';
 })
 export class UsersComponent implements OnInit {
 
-  //users : any;
-  users: any[] = [];
+ 
+  user!: UserI;
   
-  constructor(private apiService : ApiService) { }
+  constructor(
+    private apiService : ApiService,
+    private userDetailService : UserDetailService) { }
 
   ngOnInit(): void {
-    //this.getUsers();
-    //this.apiService.getUsers(this.route.snapshot.paramMap.get('id'));
-
-  //   this.student = this.studentService.studentById;
-  //   console.log(this.student);
-  // }
+     const url = window.location.pathname;
+     var id = url.substring(url.lastIndexOf('/') +1);
+     console.log('user' , id);
+     var newId : number = +id;
+     this.getUser(newId);
+     
   }
 
-  getUsers()
+  getUser(id : number)
   {
-    this.apiService.getUsers().subscribe((data : any)=> {
-      this.users = data;
-          console.log(this.users);
-
-          localStorage.setItem("users", JSON.stringify(this.users))
+    this.apiService.getUser(id).subscribe((data : any)=> {
+      this.user = data;
+          console.log(data);
     });
+    this.user = this.userDetailService.selectedUser;
+    console.log(this.user);
+    
    
 }
 
