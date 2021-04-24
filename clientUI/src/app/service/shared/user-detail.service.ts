@@ -10,6 +10,7 @@ export class UserDetailService {
 
   constructor() { }
 
+  //will set the selected user
   setSelectedUser(user : UserI) : void{
     this.selectedUser = user;
   }

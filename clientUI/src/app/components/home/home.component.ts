@@ -18,7 +18,7 @@ export class HomeComponent implements OnInit {
     private apiService: ApiService, 
     private router :Router , 
     private userDetailService : UserDetailService) { }
-
+//used for searching
   filterTerm: string ='';
 
   ngOnInit(): void {
@@ -31,21 +31,21 @@ export class HomeComponent implements OnInit {
       this.users = data;
     });
   }
-
+ // filters the search
   filterByName(filterValue : string) : void{
     let data = this.users.filter((value)=> {
       value.name.toLocaleLowerCase().includes(filterValue);
     });
     this.users = data;
   }
-
+//gets selected/clicked user
   getSelectedUser(user :UserI , index:number) : void
   {
     this.userDetailService.setSelectedUser(user);
     this.selectedUserIndex = index;
-
   }
 
+  //routes to the user 
   detailsRoute(id :number)
   {
     this.router.navigateByUrl(`/user/${id}`);

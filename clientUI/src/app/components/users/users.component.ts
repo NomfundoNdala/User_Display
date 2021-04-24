@@ -26,6 +26,8 @@ export class UsersComponent implements OnInit {
      
   }
 
+
+//gets the user by id
   getUser(id : number)
   {
     this.apiService.getUser(id).subscribe((data : any)=> {
